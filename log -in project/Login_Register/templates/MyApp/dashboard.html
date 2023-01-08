@@ -1,0 +1,70 @@
+{% extends 'MyApp/base.html' %}
+
+{% load static %}
+
+
+{% block css %}
+{% endblock css %}
+
+{% block js %}
+{% endblock js %}
+
+{% block title %}
+<title>Dashboard Page</title>
+{% endblock title %}
+
+
+
+{% block body %}
+
+{% if messages %}
+
+    {% for msg in messages %}
+
+        <p {% if msg.tags %} class="p-3 alert-{{msg.tags}}" {% endif %}>{{msg}}</p>
+
+
+    {% endfor %}
+
+{% endif %}
+
+
+    <div class="container shadow pb-3">
+        <h1 class="display-5 text-center text-primary p-3">Dashboard Page</h1>
+
+    </div>
+    <div class="container">
+        
+        <a href="{% url 'add_blog' %}" class="btn btn-primary">Add Blog</a>
+        
+    </div>
+
+    <div class="container">
+
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" class="w-25">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col" class="w-25">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for d in data %}
+              <tr>
+                <td>{{d.title}}</td>
+                <td>{{d.desc}}</td>
+                <td>
+                    <a href="{% url 'edit_blog' d.id %}" class="btn btn-success">Edit</a>
+
+                    {% if perms.MyApp.delete_BlogModel %}
+                    <a href="{% url 'delete_blog' d.id %}" class="btn btn-danger">Detele</a>
+                    {% endif %}
+                  </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+    </div>
+{% endblock body %}

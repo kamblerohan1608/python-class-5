@@ -1,0 +1,76 @@
+{% extends 'MyApp/base.html' %}
+
+{% load static %}
+
+
+{% block css %}
+{% endblock css %}
+
+{% block js %}
+{% endblock js %}
+
+{% block title %}
+<title>Home Page</title>
+{% endblock title %}
+
+
+
+{% block body %}
+
+    {% if messages %}
+
+        {% for msg in messages %}
+
+            <p  {% if msg.tags %} class="p-3 alert-{{msg.tags}} " {% endif %}>{{msg}}</p>
+
+        {% endfor %}
+
+
+    {% endif %}
+
+
+    <div class="container shadow pb-3">
+        <h1 class="display-5 text-center text-primary p-3">Home Page</h1>
+
+    </div>
+
+    <div class="row my-3">
+
+        <div class="col-lg-5 col-sm-12 my-2">
+
+            <img src="{% static 'images/img1.jpg' %}" alt="" class="img-fluid">
+
+        </div>
+
+        <div class="col-lg-7 col-sm-12 my-2">
+
+            <form action="#" method="post">
+                {% csrf_token %}
+
+                {% for fm in form %}
+
+                <div class="form-group mb-3">
+                    
+                    {{fm.label_tag}}{{fm}}
+                    <p class="text-danger">{{fm.errors|striptags}}</p>
+        
+                </div>
+        
+                {% endfor %}
+
+                <!-- Login Form here -->
+
+                <div class="form-group">
+
+                    <button class="btn btn-primary" type="submit">Login</button>
+                    <a href="{% url 'register' %}" class="mx-5">Register</a>
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+{% endblock body %}

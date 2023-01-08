@@ -1,0 +1,36 @@
+{% extends 'MyApp/base.html' %}
+
+{% load static %}
+
+
+{% block css %}
+{% endblock css %}
+
+{% block js %}
+{% endblock js %}
+
+{% block title %}
+<title>Blogs Page</title>
+{% endblock title %}
+
+
+
+{% block body %}
+
+    <div class="container shadow pb-3">
+        <h1 class="display-5 text-center text-primary p-3">All Blogs</h1>
+    </div>
+
+    <div class="cointainer my-3 p-3">
+
+    {% for d in data %}
+    <div class="cointainer my-3 p-3 border-bottom">
+        <p class="display-5">{{d.title}}</p>
+        <p class="lead">{{d.desc}}</p>
+    </div>
+    {% endfor %}
+</div>
+    
+
+
+{% endblock body %}
